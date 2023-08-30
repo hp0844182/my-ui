@@ -84,7 +84,8 @@ export const Primitive = defineComponent({
     const asTag = props.asChild ? "template" : props.as;
     if (asTag !== "template") {
       return () => h(props.as, {
-        attrs:attrs
+        attrs:attrs,
+        on:listeners,
       },slots.default?.());
     }
     return () => {

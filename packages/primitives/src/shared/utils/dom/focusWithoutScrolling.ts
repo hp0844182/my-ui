@@ -8,7 +8,7 @@
 // Original licensing for the following methods can be found in the
 // NOTICE file in the root directory of this source tree.
 // See https://github.com/calvellido/focus-options-polyfill
-export interface FocusableElement extends Element, HTMLOrSVGElement {}
+interface FocusableElement extends Element, HTMLOrSVGElement {}
 
 interface ScrollableElement {
   element: HTMLElement,

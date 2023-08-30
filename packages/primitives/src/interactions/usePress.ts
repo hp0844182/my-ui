@@ -1,12 +1,11 @@
-import { type PressEvents, type PointerType, isVirtualClick, isVirtualPointerEvent, type PressEvent as IPressEvent } from '@/shared';
+import { type PressEvents, type PointerType, isVirtualClick, isVirtualPointerEvent, type PressEvent as IPressEvent, useGlobalListeners } from '@/shared';
 import { mergeEvents } from '@/shared/utils/dom';
 import { focusWithoutScrolling } from '@/shared/utils/dom/focusWithoutScrolling';
-import { useEventListener } from '@vueuse/core';
 import { ref } from 'vue';
 import type { Ref } from 'vue';
 export interface PressOptions extends PressEvents {
-  /** Whether the target is in a controlled press state (e.g. an overlay it triggers is open). */
-  isPressed?: boolean,
+  // /** Whether the target is in a controlled press state (e.g. an overlay it triggers is open). */
+  // isPressed?: boolean,
   /** Whether the press events should be disabled. */
   isDisabled?: boolean,
   /** Whether the target should not receive focus on press. */
@@ -91,6 +90,8 @@ export function usePress(props: PressOptions,listeners?:Record<string,Function|F
   const { onPressStart, onPressChange, onPressEnd, onPress, preventFocusOnPress, isDisabled, shouldCancelOnPointerExit, onPressUp } = props
   const isPressed = ref(false)
 
+  const {addGlobalListener,removeAllGlobalListeners } = useGlobalListeners()
+
   const state: PressState = {
     isPressed: false,
     ignoreEmulatedMouseEvents: false,
@@ -111,7 +112,7 @@ export function usePress(props: PressOptions,listeners?:Record<string,Function|F
       state.isOverTarget = false;
       state.activePointerId = null;
       state.pointerType = null;
-      // removeAllGlobalListeners();
+      removeAllGlobalListeners();
     }
   }
 
@@ -196,7 +197,7 @@ export function usePress(props: PressOptions,listeners?:Record<string,Function|F
       state.isPressed = false;
       const target = e.target as Element;
       triggerPressEnd(createEvent(state.target!, e as any), 'keyboard', (state.target as any)?.contains(target));
-      // removeAllGlobalListeners();
+      removeAllGlobalListeners();
       // If the target is a link, trigger the click method to open the URL,
       // but defer triggering pressEnd until onClick event handler.
       if (state.target instanceof HTMLElement && state.target.contains(target) && (isHTMLAnchorLink(state.target) || state.target.getAttribute('role') === 'link')) {
@@ -236,8 +237,8 @@ export function usePress(props: PressOptions,listeners?:Record<string,Function|F
       state.isOverTarget = false;
       state.activePointerId = null;
       state.pointerType = null;
-      //TODO: remove
-      // removeAllGlobalListeners();
+      
+      removeAllGlobalListeners();
     }
   };
 
@@ -260,7 +261,7 @@ export function usePress(props: PressOptions,listeners?:Record<string,Function|F
 
           // Focus may move before the key up event, so register the event on the document
           // instead of the same element where the key down event occurred.
-          useEventListener(document, 'keyup', onKeyUp)
+          addGlobalListener(document, 'keyup', onKeyUp,false)
         }
 
         if (shouldStopPropagation) {
@@ -346,13 +347,14 @@ export function usePress(props: PressOptions,listeners?:Record<string,Function|F
         }
 
         shouldStopPropagation = triggerPressStart(e as any, state.pointerType);
-        useEventListener(document, 'pointermove', onPointerMove);
-        useEventListener(document, 'pointerup', onPointerUp);
-        useEventListener(document, 'pointercancel', cancel);
+        addGlobalListener(document, 'pointermove', onPointerMove,false);
+        addGlobalListener(document, 'pointerup', onPointerUp,false);
+        addGlobalListener(document, 'pointercancel', cancel as any,false);
       }
     }
 
     pressProps.mousedown = (e) => {
+      console.log('mousedown',e)
       if (!(e.currentTarget as any).contains(e.target as Element)) {
         return;
       }

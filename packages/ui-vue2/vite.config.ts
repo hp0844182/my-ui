@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue2'
 import vueJsx from "@vitejs/plugin-vue2-jsx";
 import alias from "@rollup/plugin-alias";
 import { resolve } from "path";
-import DefineOptions from 'unplugin-vue-define-options/vite'
+
 const projectRootDir = resolve(__dirname);
 
 // https://vitejs.dev/config/
@@ -11,7 +11,6 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    DefineOptions(),
     alias({
       entries: [
         {

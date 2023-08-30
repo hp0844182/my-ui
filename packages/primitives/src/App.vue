@@ -1,28 +1,37 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-const events = ref<any>([])
-import { useFocus } from './interactions/useFocus';
-import { usePress } from './interactions/usePress';
+import Button from '@/components/button/button.vue';
 
-const {isPressed,pressProps} = usePress({
-  onPress(e){
-    console.log('e',e)
-  }
-})
-const handleClck = (e:MouseEvent) => {
-  console.log('e',e.currentTarget)
+const onPress = (e:any) => {
+  console.log('onPress',e)
+}
+const onPressStart = (e)=>{
+  console.log('onPressStart',e)
+}
+const onPressEnd = (e)=>{
+  console.log('onPressEnd',e)
+}
+const onPressUp = (e)=>{
+  console.log('onPressUp',e)
+}
+const onPressChange = (e)=>{
+  console.log('onPressChange',e)
 }
 </script>
 
 <template>
   <div>
-    <button
-      type="button"
-      v-on="pressProps"
-      @click="handleClck"
+    <Button
+      as="button"
+      @press="onPress"
+      @press-start="onPressStart"
+      @press-end="onPressEnd"
+      @press-change="onPressChange"
+      @press-up="onPressUp"
     >
-      {{ isPressed }}
-    </button>
+      <!-- @press="onPress" -->
+      <!-- @click="handleClick" -->
+      button
+    </Button>
   </div>
   <!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>

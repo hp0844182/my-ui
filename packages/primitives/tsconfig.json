@@ -24,6 +24,7 @@
     "lib": ["esnext", "dom"],
     "baseUrl": ".",
     "skipLibCheck": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "types": ["unplugin-vue-define-options/macros-global" /* ... */]
   }
 }

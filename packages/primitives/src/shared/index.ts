@@ -19,3 +19,4 @@ export * from './types/index'
 export * from './event'
 export * from './platform'
 
+export * from './utils'
