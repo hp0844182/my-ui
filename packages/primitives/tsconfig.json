@@ -25,6 +25,18 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "outDir": "dist",
-    "types": ["unplugin-vue-define-options/macros-global" /* ... */]
+    "types": ["unplugin-vue-define-options/macros-global","@vue-macros/reactivity-transform/macros-global"]
+  },
+  "vueCompilerOptions": {
+    "target": 2.7,
+    "plugins": [
+      "@vue-macros/volar/define-options",
+      "@vue-macros/volar/define-models",
+      "@vue-macros/volar/define-props",
+      "@vue-macros/volar/define-props-refs",
+      "@vue-macros/volar/short-vmodel",
+      "@vue-macros/volar/define-slots",
+      "@vue-macros/volar/jsx-directive"
+    ]
   }
 }

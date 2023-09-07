@@ -4,13 +4,20 @@ import vueJsx from "@vitejs/plugin-vue2-jsx";
 import alias from "@rollup/plugin-alias";
 import { resolve } from "path";
 import DefineOptions from 'unplugin-vue-define-options/vite'
+// import VueTypeImports from '@rah-emil/vite-plugin-vue-type-imports'
+import VueMacros from 'unplugin-vue-macros/vite'
 const projectRootDir = resolve(__dirname);
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
-    vueJsx(),
+    VueMacros({
+      plugins:{
+        vue:vue(),
+        vueJsx:vueJsx()
+      }
+    }),
+    // VueTypeImports(),
     DefineOptions(),
     alias({
       entries: [
@@ -30,7 +37,7 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library (Vue)
-      external: ["vue","@vueuse/core"],
+      external: ["vue", "@vueuse/core"],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
