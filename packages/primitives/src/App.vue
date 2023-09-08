@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Avatar } from '@/components/avatar';
 import Button from '@/components/button/button.vue';
 import { Motion,Presence,PresenceGroup } from '@/components/motion';
 import { ref } from 'vue';
@@ -30,6 +31,146 @@ const newE = ()=>{
 
 <template>
   <div>
+    <div class="flex gap-3 items-center">
+      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+      <Avatar name="Junior" />
+      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+      <Avatar name="Jane" />
+      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+      <Avatar name="Joe" />
+    </div>
+    <div class="flex gap-4 items-center">
+      <Avatar
+        src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+        class="w-6 h-6 text-tiny"
+      />
+      <Avatar
+        src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+        size="sm"
+      />
+      <Avatar
+        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+        size="md"
+      />
+      <Avatar
+        src="https://i.pravatar.cc/150?u=a04258114e29026302d"
+        size="lg"
+      />
+      <Avatar
+        src="https://i.pravatar.cc/150?u=a04258114e29026708c"
+        class="w-20 h-20 text-large"
+      />
+    </div>
+    <div class="flex gap-3 items-center">
+      <Avatar
+        :is-disabled="true"
+        src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+      />
+      <Avatar
+        :is-disabled="true"
+
+        name="Junior"
+      />
+      <Avatar
+        :is-disabled="true"
+        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+      />
+      <Avatar
+        :is-disabled="true"
+        name="Jane"
+      />
+      <Avatar
+        :is-disabled="true"
+        src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+      />
+      <Avatar
+        :is-disabled="true"
+        name="Joe"
+      />
+    </div>
+    <div class="flex gap-4 items-center">
+      <Avatar
+        :is-bordered="true"
+        src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+      />
+      <Avatar
+        :is-bordered="true"
+        src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+      />
+      <Avatar
+        :is-bordered="true"
+        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+      />
+      <Avatar
+        :is-bordered="true"
+        src="https://i.pravatar.cc/150?u=a04258114e29026302d"
+      />
+      <Avatar
+        :is-bordered="true"
+        src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+      />
+      <Avatar
+        :is-bordered="true"
+        src="https://i.pravatar.cc/150?u=a04258114e29026708c"
+      />
+    </div>
+
+    <div class="flex gap-4 items-center">
+      <Avatar
+        :is-bordered="true"
+        radius="full"
+        src="https://i.pravatar.cc/150?u=a04258114e29026708c"
+      />
+      <Avatar
+        :is-bordered="true"
+        radius="lg"
+        src="https://i.pravatar.cc/150?u=a04258114e29026302d"
+      />
+      <Avatar
+        :is-bordered="true"
+        radius="md"
+        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+      />
+      <Avatar
+        :is-bordered="true"
+        radius="sm"
+        src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+      />
+    </div>
+
+    <div class="flex gap-4 items-center">
+      <Avatar
+        :is-bordered="true"
+        color="default"
+        src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+      />
+      <Avatar
+        :is-bordered="true"
+        color="primary"
+        src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+      />
+      <Avatar
+        :is-bordered="true"
+        color="secondary"
+        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+      />
+      <Avatar
+        :is-bordered="true"
+        color="success"
+        src="https://i.pravatar.cc/150?u=a04258114e29026302d"
+      />
+      <Avatar
+        :is-bordered="true"
+        color="warning"
+        src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+      />
+      <Avatar
+        :is-bordered="true"
+        color="danger"
+        src="https://i.pravatar.cc/150?u=a04258114e29026708c"
+      />
+    </div>
+
     <Button
       href="https://vitejs.dev"
       color="success"
